@@ -32,4 +32,4 @@ echo "alias ls='ls --color=auto'" >> ~/.zshrc
 
 
 # Apply the changes
-source ~/.zshrc
+exec zsh
