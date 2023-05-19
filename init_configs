@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Update package lists
+sudo apt-get update
+
+# Install Zsh
+sudo apt-get install -y zsh
+
+# Install git (required for cloning the Powerlevel10k and zsh-autosuggestions repositories)
+sudo apt-get install -y git
+
+# Change default shell to Zsh
+chsh -s $(which zsh)
+
+# Clone Powerlevel10k repository and set as current theme in .zshrc
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+
+#Copy p10k configs
+cp .p10k.zsh ~/.p10k.zsh -i
+
+# Clone zsh-autosuggestions repository and source it in .zshrc
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' >>~/.zshrc
+
+# Add auto-completion to .zshrc
+echo 'autoload -Uz compinit' >>~/.zshrc
+echo 'compinit' >>~/.zshrc
+
+# Colorize the ls command
+echo "alias ls='ls --color=auto'" >> ~/.zshrc
+
+
+# Apply the changes
+source ~/.zshrc
